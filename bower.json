@@ -1,0 +1,7 @@
+{
+  "name": "testbud",
+  "version": "0.0.0",
+  "dependencies": {
+  	"jquery" : "latest"
+  }
+}

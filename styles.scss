@@ -1,0 +1,77 @@
+$color-p1: white;
+$color-p2: tomato;
+
+html,body {
+	background-color: $color-p2;
+	padding: 4.0em;
+}
+
+h1, p {
+	margin: auto;
+	text-align: center;
+	color: $color-p1;
+	font-family: 'Lato', 'Verdana';
+}
+
+
+$color-triangles: $color-p1;
+
+$ratio-42: 0.632556942; //atan(42)
+$h1: 17px;
+$w1: $h1 * $ratio-42;
+
+.triangles,
+.triangles::before,
+.triangles::after {
+	box-sizing: border-box;
+
+	position: absolute;
+
+	width: 0;
+	height: 0;
+
+	border-top: $h1 solid transparent;
+	border-bottom: $h1 solid transparent;
+
+	border-right: $w1 solid $color-triangles;
+}
+
+.triangles {
+	position: relative;
+	margin: auto;
+	top: 7 * $h1;
+	margin-top: 40px;
+}
+
+.triangles::before,
+.triangles::after {
+	content: '';
+}
+
+@keyframes fade {
+	0%,30% {
+		border-right-color: rgba(255,255,255,0);
+	}
+	50%,70%  {
+		border-right-color: rgba(255,255,255,1);
+	}
+	90%,100% {
+		border-right-color: rgba(255,255,255,0);
+	}
+}
+
+$duration: 2s;
+$off: $duration / 5;
+$timing: linear;
+.triangles {
+	animation: fade $duration $timing infinite;
+	&::before {
+		animation: fade $duration $timing $off infinite;
+		transform: translate(-0.5 * $w1,-3 * $h1) scale(-2);
+	}
+	&::after {
+		animation: fade $duration $timing (2 * $off) infinite;
+		transform: translate(0,-6 * $h1) scale(3);
+	}
+}
+
